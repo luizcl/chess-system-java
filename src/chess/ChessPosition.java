@@ -28,7 +28,7 @@ public class ChessPosition {
 	private char lastColumn() {
 		
 		int first = (char) 'A';
-		int last = first + this.board.getColumns();	
+		int last = first + this.board.getColumns() - 1;	
 		return ( (char) last);
 	}
 	
@@ -37,7 +37,7 @@ public class ChessPosition {
 	}
 	
 	private int lastRow() {
-		return 1+this.board.getRows();
+		return this.board.getRows();
 	}
 
 	public char getColumn() {
@@ -52,8 +52,8 @@ public class ChessPosition {
 		return new Position( 8-this.row , this.column-'A');
 	}
 	
-	protected static ChessPosition fromPosition(Position position, Board board) {
-		 return new ChessPosition((char)('A' - position.getColumn()), 8 - position.getRow(), board);
+	public static ChessPosition fromPosition(Position position, Board board) {
+		 return new ChessPosition((char)('A' + position.getColumn()), 8 - position.getRow(), board);
 	}
 	
 	@Override

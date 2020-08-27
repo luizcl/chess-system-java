@@ -1,6 +1,7 @@
 package boardgame;
 
 import boardgame.exceptions.BoardException;
+import chess.ChessPosition;
 
 public class Board {
 	
@@ -38,7 +39,7 @@ public class Board {
 	
 	public void placePiece(Piece piece, Position position) {
 		if(thereIsAPiece(position))
-			throw new BoardException("There is already a piece on position" + position);
+			throw new BoardException("There is already a piece on position " + ChessPosition.fromPosition(position, this));
 		pieces[position.getRow()][position.getColumn()] = piece;
 		piece.position = position;
 	}
