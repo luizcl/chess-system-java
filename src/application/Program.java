@@ -1,10 +1,12 @@
 package application;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 import chess.ChessMatch;
 import chess.ChessPiece;
 import chess.ChessPosition;
+import chess.exceptions.ChessException;
 
 public class Program {
 
@@ -13,18 +15,37 @@ public class Program {
 		Scanner sc = new Scanner(System.in);
 		ChessMatch chessMatch = new ChessMatch();
 		while(true) {
-			UI.printBoard(chessMatch.getPieces());
-			System.out.println();
-			System.out.print("Source: ");
-			ChessPosition source = UI.readChessPosition(sc, chessMatch.getBoard());
-			
-			System.out.println();
-			System.out.print("Target: ");
-			ChessPosition target = UI.readChessPosition(sc, chessMatch.getBoard());
-			
-			ChessPiece capturedPiece = chessMatch.performChessMove(source, target);
+			try {
+				UI.clearScreen();
+				UI.printBoard(chessMatch.getPieces());
+				System.out.println();
+				System.out.print("Source: ");
+				ChessPosition source = UI.readChessPosition(sc, chessMatch.getBoard());
+				
+				System.out.println();
+				System.out.print("Target: ");
+				ChessPosition target = UI.readChessPosition(sc, chessMatch.getBoard());
+				
+				ChessPiece capturedPiece = chessMatch.performChessMove(source, target);
+			}
+			catch (ChessException e){
+				System.out.println(e.getMessage());
+				sc.hasNextLine();
+				clearBuffer(sc);
+			}
+			catch (InputMismatchException e){
+				System.out.println(e.getMessage());
+				sc.hasNextLine();
+				clearBuffer(sc);
+			}
 		}
 		
+	}
+	
+	public static void clearBuffer(Scanner scanner) {
+        if (scanner.hasNextLine()) {
+            scanner.nextLine();
+        }
 	}
 
 }
