@@ -32,12 +32,23 @@ public class ChessPosition {
 		return ( (char) last);
 	}
 	
+	public static char lastColumn(Board board) {
+		
+		int first = (char) 'A';
+		int last = first + board.getColumns() - 1;	
+		return ( (char) last);
+	}
+	
 	private int firstRow() {
 		return 1;
 	}
 	
 	private int lastRow() {
 		return this.board.getRows();
+	}
+	
+	public static int lastRow(Board board) {
+		return board.getRows();
 	}
 
 	public char getColumn() {
