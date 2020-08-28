@@ -15,7 +15,7 @@ public class ChessPosition {
 			throw new ChessException("The board should already exist before the Chess piece");
 		}
 		this.board = board;
-		if(column < firstColumn() || column > lastColumn() || row < firstRow() || row > lastColumn())
+		if(column < firstColumn() || column > lastColumn() || row < firstRow() || row > lastRow())
 			throw new ChessException("Error instantianting ChessPosition. Valid values are from A1 to " + String.valueOf((lastColumn())) + lastRow());
 		this.column = column;
 		this.row = row;
@@ -60,7 +60,7 @@ public class ChessPosition {
 	}
 	
 	protected Position toPosition() {
-		return new Position( 8-this.row , this.column-'A');
+		return new Position( lastRow() - this.row , this.column-'A');
 	}
 	
 	public static ChessPosition fromPosition(Position position, Board board) {

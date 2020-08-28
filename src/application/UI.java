@@ -42,6 +42,7 @@ public class UI {
 		try {
 			String s = sc.nextLine();
 			char column = s.charAt(0);
+			column = Character.toUpperCase(column);
 			int row = (int) (s.charAt(1) - '0');
 			return new ChessPosition(column, row, board);
 		}
