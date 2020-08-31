@@ -8,28 +8,28 @@ public class ChessPosition {
 	
 	private char column;
 	private int row;
-	private Board board;
+	private int firstColumn;
+	private int firstRow;
+	private int lastColumn;
+	private int lastRow;
+	
 	
 	public ChessPosition(char column, int row, Board board) {
 		if(board == null) {
 			throw new ChessException("The board should already exist before the Chess piece");
 		}
-		this.board = board;
-		if(column < firstColumn() || column > lastColumn() || row < firstRow() || row > lastRow())
-			throw new ChessException("Error instantianting ChessPosition. Valid values are from A1 to " + String.valueOf((lastColumn())) + lastRow());
+		this.firstRow = firstRow();
+		this.firstColumn = firstColumn();
+		this.lastRow = lastRow(board);
+		this.lastColumn = lastColumn(board);
+		if(column < this.firstColumn || column > this.lastColumn || row < this.firstRow || row > this.lastColumn)
+			throw new ChessException("Error instantianting ChessPosition. Valid values are from A1 to " + String.valueOf(this.lastColumn) + this.lastRow);
 		this.column = column;
 		this.row = row;
 	}
 	
 	private char firstColumn() {
 		return 'A';
-	}
-	
-	private char lastColumn() {
-		
-		int first = (char) 'A';
-		int last = first + this.board.getColumns() - 1;	
-		return ( (char) last);
 	}
 	
 	public static char lastColumn(Board board) {
@@ -41,10 +41,6 @@ public class ChessPosition {
 	
 	private int firstRow() {
 		return 1;
-	}
-	
-	private int lastRow() {
-		return this.board.getRows();
 	}
 	
 	public static int lastRow(Board board) {
@@ -59,8 +55,24 @@ public class ChessPosition {
 		return this.row;
 	}
 	
+	public int getFirstColumn() {
+		return firstColumn;
+	}
+
+	public int getFirstRow() {
+		return firstRow;
+	}
+
+	public int getLastColumn() {
+		return lastColumn;
+	}
+
+	public int getLastRow() {
+		return lastRow;
+	}
+
 	protected Position toPosition() {
-		return new Position( lastRow() - this.row , this.column-'A');
+		return new Position( this.lastRow - this.row , this.column-'A');
 	}
 	
 	public static ChessPosition fromPosition(Position position, Board board) {
