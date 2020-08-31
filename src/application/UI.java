@@ -21,7 +21,6 @@ public class UI {
 	public static final String ANSI_PURPLE = "\u001B[35m";
 	public static final String ANSI_CYAN = "\u001B[36m";
 	public static final String ANSI_WHITE = "\u001B[37m";
-	public static final String ANSI_MAGENTA = "\033[0;35m";
 
 	public static final String ANSI_BLACK_BACKGROUND = "\u001B[40m";
 	public static final String ANSI_RED_BACKGROUND = "\u001B[41m";
@@ -84,7 +83,7 @@ public class UI {
 				System.out.print(ANSI_WHITE + piece + ANSI_RESET);
 			} 
 			else {
-				System.out.print(ANSI_MAGENTA + piece + ANSI_RESET);
+				System.out.print(ANSI_PURPLE + piece + ANSI_RESET);
 			}
 		}
 	}
@@ -113,11 +112,12 @@ public class UI {
 	
 	private static void printPiece(ChessPiece piece, boolean background) {
 		
+		System.out.print(" ");
+		
 		if(background) {
 			System.out.print(ANSI_YELLOW_BACKGROUND);
 		}
 		
-		System.out.print(" ");
 		if (piece == null) {
 			System.out.print("-" + ANSI_RESET);
 		} 
@@ -126,7 +126,7 @@ public class UI {
 				System.out.print(ANSI_WHITE + piece + ANSI_RESET);
 			} 
 			else {
-				System.out.print(ANSI_MAGENTA + piece + ANSI_RESET);
+				System.out.print(ANSI_PURPLE + piece + ANSI_RESET);
 			}
 		}
 	}
