@@ -60,6 +60,8 @@ public class UI {
 			}
 			System.out.println();
 		}
+		
+		//Print Columns name
 		System.out.print("   ");
 		for (int i = 0; i < pieces[0].length; i++) {
 			int ascii = 'A';
@@ -86,4 +88,47 @@ public class UI {
 			}
 		}
 	}
+	
+	public static void printBoard(ChessPiece[][] pieces, boolean[][] possibleMoves) {
+
+		for (int i = 0; i < pieces.length; i++) {
+			System.out.print(ANSI_BLUE + (pieces.length - i) + " " + ANSI_RESET);
+			for (int j = 0; j < pieces[i].length; j++) {
+				printPiece(pieces[i][j], possibleMoves[i][j]);
+			}
+			System.out.println();
+		}
+		
+		//Print Columns name
+		System.out.print("   ");
+		for (int i = 0; i < pieces[0].length; i++) {
+			int ascii = 'A';
+			ascii = ascii + i;
+			char letter = (char) ascii;
+			System.out.print(ANSI_BLUE + letter + " " + ANSI_RESET);
+		}
+		System.out.println();
+
+	}
+	
+	private static void printPiece(ChessPiece piece, boolean background) {
+		
+		if(background) {
+			System.out.print(ANSI_YELLOW_BACKGROUND);
+		}
+		
+		System.out.print(" ");
+		if (piece == null) {
+			System.out.print("-" + ANSI_RESET);
+		} 
+		else {
+			if (piece.getColor() == Color.WHITE) {
+				System.out.print(ANSI_WHITE + piece + ANSI_RESET);
+			} 
+			else {
+				System.out.print(ANSI_MAGENTA + piece + ANSI_RESET);
+			}
+		}
+	}
+	
 }
