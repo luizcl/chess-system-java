@@ -18,7 +18,7 @@ public class Program {
 		ChessMatch chessMatch = new ChessMatch();
 		List<ChessPiece> captured = new ArrayList<ChessPiece>();
 		
-		while(true) {
+		while(!chessMatch.getCheckMate()) {
 			try {
 				UI.clearScreen();
 				UI.printMatch(chessMatch, captured);
@@ -46,23 +46,19 @@ public class Program {
 				System.out.println(e.getMessage());
 				System.out.println(UI.ANSI_RESET);
 				sc.hasNextLine();
-				clearBuffer(sc);
+				UI.clearBuffer(sc);
 			}
 			catch (InputMismatchException e){
 				System.out.println(UI.ANSI_RED);
 				System.out.println(e.getMessage());
 				System.out.println(UI.ANSI_RESET);
 				sc.hasNextLine();
-				clearBuffer(sc);
+				UI.clearBuffer(sc);
 			}
 		}
+		UI.clearScreen();
+		UI.printMatch(chessMatch, captured);
 		
-	}
-	
-	public static void clearBuffer(Scanner scanner) {
-        if (scanner.hasNextLine()) {
-            scanner.nextLine();
-        }
 	}
 
 }
